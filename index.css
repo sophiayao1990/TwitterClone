@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+header,
+main {
+  width: 500px;
+  border: 1px solid pink;
+  margin: 0 auto;
+  padding: 20px 30px;
+}
+h1 {
+  color: #0f8cdf;
+}
+.tweet-input-area {
+  display: flex;
+  justify-content: space-between;
+}
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+textarea {
+  height: 90px;
+  width: 85%;
+  border: none;
+  resize: none;
+  font-size: 16px;
+  padding: 10px;
+}
+.tweet-btn {
+  width: 100%;
+  margin: 15px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 18px;
+
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: #0f8cdf;
+}
+
+/*feed*/
+.tweet {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid grey;
+  padding: 20px 0;
+}
+.tweet-content {
+  margin-right: 40px;
+}
+.handle {
+  padding-bottom: 10px;
+  font-size: 0.8rem;
+}
+
+.tweet-text {
+  line-height: 1.5;
+  font-size: 1rem;
+}
+.tweet-details {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  padding-top: 15px;
+}
