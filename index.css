@@ -68,6 +68,7 @@ textarea {
   width: 300px;
   padding-top: 15px;
   color: grey;
+  cursor: pointer;
 }
 .liked {
   color: red;
