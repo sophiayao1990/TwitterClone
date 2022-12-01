@@ -68,6 +68,7 @@ textarea {
   justify-content: space-between;
   width: 300px;
   padding-top: 15px;
+  color: grey;
 }
 .liked {
   color: red;

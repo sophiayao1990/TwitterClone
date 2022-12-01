@@ -1,10 +1,8 @@
 import { tweetsData } from "./data.js";
+import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 
 const tweetInput = document.getElementById("tweet-input");
 
-const handleTweetBtn = () => {
-  console.log(tweetInput.value);
-};
 document.addEventListener("click", (e) => {
   if (e.target.dataset.likes) {
     handleLikeClick(e.target.dataset.likes);
@@ -12,6 +10,8 @@ document.addEventListener("click", (e) => {
     handleRetweetClick(e.target.dataset.retweets);
   } else if (e.target.dataset.replies) {
     handleReplyClick(e.target.dataset.replies);
+  } else if (tweetInput.value && e.target.id === "tweet-btn") {
+    handleTweetBtnClick();
   }
 });
 
@@ -41,16 +41,29 @@ const handleRetweetClick = (tweetId) => {
 
 const handleReplyClick = (tweetId) => {
   document.getElementById(`replies-${tweetId}`).classList.toggle("hidden");
-  console.log(tweetId);
 };
 
-document.getElementById("tweet-btn").addEventListener("click", handleTweetBtn);
+const handleTweetBtnClick = () => {
+  tweetsData.unshift({
+    handle: `@Jingfei💎`,
+    profilePic: `images/avatar.jpg`,
+    likes: 0,
+    retweets: 0,
+    tweetText: `${tweetInput.value}`,
+    replies: [],
+    isLiked: false,
+    isRetweeted: false,
+    uuid: uuidv4(),
+  });
+  render();
+  tweetInput.value = "";
+};
 
 const getHtml = () => {
   let feedHtml = "";
-  let replyHtml = "";
 
   tweetsData.forEach(function (tweet) {
+    let replyHtml = "";
     tweet.replies.forEach(function (reply) {
       replyHtml += `
         <div class="tweet-reply">
@@ -91,7 +104,7 @@ const getHtml = () => {
                 </div>
             </div>
         </div> 
-        <div id="replies-${tweet.uuid}">
+        <div id="replies-${tweet.uuid}" class='hidden'>
         ${replyHtml}
         </div> 
     </div>`;
