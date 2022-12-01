@@ -10,6 +10,8 @@ document.addEventListener("click", (e) => {
     handleLikeClick(e.target.dataset.likes);
   } else if (e.target.dataset.retweets) {
     handleRetweetClick(e.target.dataset.retweets);
+  } else if (e.target.dataset.replies) {
+    handleReplyClick(e.target.dataset.replies);
   }
 });
 
@@ -37,15 +39,32 @@ const handleRetweetClick = (tweetId) => {
   render();
 };
 
+const handleReplyClick = (tweetId) => {
+  document.getElementById(`replies-${tweetId}`).classList.toggle("hidden");
+  console.log(tweetId);
+};
+
 document.getElementById("tweet-btn").addEventListener("click", handleTweetBtn);
 
 const getHtml = () => {
   let feedHtml = "";
-  const heartColor = "";
-  tweetsData.forEach(
-    (tweet) =>
-      (feedHtml += `
-    <div class="tweet">
+  let replyHtml = "";
+
+  tweetsData.forEach(function (tweet) {
+    tweet.replies.forEach(function (reply) {
+      replyHtml += `
+        <div class="tweet-reply">
+            <img src="${reply.profilePic}" class="profile-pic">
+                <div>
+                    <p class="handle">${reply.handle}</p>
+                    <p class="tweet-text">${reply.tweetText}</p>
+                </div>
+        </div>`;
+    });
+
+    feedHtml += `
+    <div class="tweet-container">
+        <div class='tweet'>
             <img src="${tweet.profilePic}" alt="" class="profile-pic">
             <div class='tweet-content'>
                 <p class="handle">${tweet.handle}</p>
@@ -71,8 +90,12 @@ const getHtml = () => {
                     </span>
                 </div>
             </div>
-        </div>`)
-  );
+        </div> 
+        <div id="replies-${tweet.uuid}">
+        ${replyHtml}
+        </div> 
+    </div>`;
+  });
   return feedHtml;
 };
 
