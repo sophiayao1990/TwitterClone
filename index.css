@@ -69,3 +69,9 @@ textarea {
   width: 300px;
   padding-top: 15px;
 }
+.liked {
+  color: red;
+}
+.retweeted {
+  color: limegreen;
+}
